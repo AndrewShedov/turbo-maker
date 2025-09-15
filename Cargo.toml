@@ -4,28 +4,11 @@ version = "0.1.0"
 edition = "2021"
 description = "Super-fast multi-threaded document generator for MongoDB, operating through CLI."
 keywords = [
-    "mongodb",
     "data-generator",
     "mongodb-generator",
     "stress-test-mongodb",
     "multithreaded-db-tool",
-    "multithreaded-mongodb-tool",
-    "fast-mongodb-generator",
     "super-speed",
-    "speed",
-    "performance",
-    "benchmark",
-    "benchmark-mongodb",
-    "stress-testing",
-    "load-testing",
-    "multithreading",
-    "CPU",
-    "CLI",
-    "turbo",
-    "big-data",
-    "synthetic-data",
-    "bulk-insert",
-    "mongodb-utils"
 ]
 license = "MIT"
 repository = "https://github.com/AndrewShedov/turboMaker"
