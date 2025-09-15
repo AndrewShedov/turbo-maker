@@ -27,7 +27,6 @@ keywords = [
     "bulk-insert",
     "mongodb-utils"
 ]
-author = "Andrew Shedov <https://shedov.top>"
 license = "MIT"
 repository = "https://github.com/AndrewShedov/turboMaker"
 homepage = "https://shedov.top"
@@ -38,5 +37,5 @@ clap = { version = "4", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 toml = "0.8"
-sysinfo = "0.30.13"  # Уточнена версия
-rand = "0.8"  # Добавлена зависимость
+sysinfo = "0.30.13"
+rand = "0.8"

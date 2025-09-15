@@ -12,7 +12,7 @@ pub struct Config {
     pub number_documents: u64,
     pub batch_size: u64,
     pub time_step_ms: u64,
-    // Убрано поле generator_path
+    // Removen "generator_path"
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -41,7 +41,7 @@ pub async fn load_and_validate_config(path: &str) -> Result<Config, Box<dyn std:
 fn validate_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     let required_fields = [
         "uri", "db", "collection", "number_threads", "number_documents", "batch_size", "time_step_ms",
-        // Убрано "generator_path"
+        // Removen "generator_path"
     ];
     for field in required_fields {
         if !config_has_field(config, field) {
@@ -60,7 +60,7 @@ fn config_has_field(config: &Config, field: &str) -> bool {
         "number_documents" => config.number_documents > 0,
         "batch_size" => config.batch_size > 0,
         "time_step_ms" => config.time_step_ms > 0,
-        // Убрано "generator_path"
+        // Removen "generator_path"
         _ => false,
     }
 }

@@ -9,7 +9,7 @@ pub fn generate_document(offset_ms: u64) -> Document {
         .as_millis() as u64 + offset_ms;
     let mut rng = rand::thread_rng();
     Document {
-        title: "1111".to_string(),
+        title: "example".to_string(),
         text: "example".to_string(),
         hashtags: vec!["#test".to_string()],
         views: rng.gen_range(120..=3125),

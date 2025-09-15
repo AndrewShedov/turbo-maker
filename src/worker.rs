@@ -43,15 +43,15 @@ pub async fn run_workers(config: Config, generate_fn: fn(u64) -> Document, gener
                 let doc = generate_fn(i * config.time_step_ms);
                 docs.push(doc);
                 if docs.len() >= config.batch_size as usize {
-                    let docs_to_insert = std::mem::take(&mut docs); // Берем владение
-                    let len = docs_to_insert.len() as u64; // Сохраняем длину перед перемещением
+                    let docs_to_insert = std::mem::take(&mut docs); // take possession
+                    let len = docs_to_insert.len() as u64; // Save the length before moving
                     collection.insert_many(docs_to_insert, None).await.unwrap();
                     generated.fetch_add(len, Ordering::SeqCst);
                 }
             }
             if !docs.is_empty() {
                 let docs_to_insert = std::mem::take(&mut docs);
-                let len = docs_to_insert.len() as u64; // Сохраняем длину перед перемещением
+                let len = docs_to_insert.len() as u64; // Save the length before moving
                 collection.insert_many(docs_to_insert, None).await.unwrap();
                 generated.fetch_add(len, Ordering::SeqCst);
             }
