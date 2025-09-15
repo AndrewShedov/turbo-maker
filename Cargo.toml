@@ -6,9 +6,9 @@ description = "Super-fast multi-threaded document generator for MongoDB, operati
 keywords = [
     "data-generator",
     "mongodb-generator",
-    "stress-test-mongodb",
-    "multithreaded-db-tool",
-    "super-speed",
+    "CLI",
+    "turbo",
+    "big-data"
 ]
 license = "MIT"
 repository = "https://github.com/AndrewShedov/turboMaker"
