@@ -1,0 +1,42 @@
+[package]
+name = "turbo-maker"
+version = "0.1.0"
+edition = "2021"
+description = "Super-fast multi-threaded document generator for MongoDB, operating through CLI."
+keywords = [
+    "mongodb",
+    "data-generator",
+    "mongodb-generator",
+    "stress-test-mongodb",
+    "multithreaded-db-tool",
+    "multithreaded-mongodb-tool",
+    "fast-mongodb-generator",
+    "super-speed",
+    "speed",
+    "performance",
+    "benchmark",
+    "benchmark-mongodb",
+    "stress-testing",
+    "load-testing",
+    "multithreading",
+    "CPU",
+    "CLI",
+    "turbo",
+    "big-data",
+    "synthetic-data",
+    "bulk-insert",
+    "mongodb-utils"
+]
+author = "Andrew Shedov <https://shedov.top>"
+license = "MIT"
+repository = "https://github.com/AndrewShedov/turboMaker"
+homepage = "https://shedov.top"
+
+[dependencies]
+mongodb = "2.8.2"
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+sysinfo = "0.30.13"  # Уточнена версия
+rand = "0.8"  # Добавлена зависимость

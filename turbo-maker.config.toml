@@ -1,0 +1,7 @@
+uri = "mongodb://127.0.0.1:27017"
+db = "crystalTest"
+collection = "posts"
+number_threads = "16"
+number_documents = 1000000
+batch_size = 10000
+time_step_ms = 20
