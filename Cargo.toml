@@ -1,6 +1,6 @@
 [package]
 name = "turbo-maker"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Super-fast multi-threaded document generator for MongoDB, operating through CLI."
 keywords = [
