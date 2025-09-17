@@ -1,6 +1,6 @@
 [package]
 name = "turbo-maker"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "Super-fast multi-threaded document generator for MongoDB, operating through CLI."
 keywords = [
@@ -11,7 +11,7 @@ keywords = [
     "big-data"
 ]
 license = "MIT"
-repository = "https://github.com/AndrewShedov/turboMaker"
+repository = "https://github.com/AndrewShedov/turbo-maker"
 homepage = "https://shedov.top"
 
 [dependencies]
