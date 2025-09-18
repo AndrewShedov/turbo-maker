@@ -46,7 +46,7 @@ pub async fn run_workers(
                 if docs.len() >= (config.batch_size as usize) {
                     let docs_to_insert = std::mem::take(&mut docs);
                     if let Ok(_) = collection.insert_many(docs_to_insert, None).await {
-                        generated.fetch_add(config.batch_size as u64, Ordering::SeqCst); // Обновляем на batch_size
+                        generated.fetch_add(config.batch_size as u64, Ordering::SeqCst); // Updating to batch_size
                     }
                 }
             }
