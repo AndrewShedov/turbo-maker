@@ -7,6 +7,13 @@
 **Super-fast** **multi-threaded** document generator for **MongoDB**, operating through **CLI**.<br>
 Generates **millions of documents** at **maximum speed**, utilizing **all CPU threads**.<br>
 
+###  Suitable for
+
+- Creating big collections (exceeding **500,000,000 documents**)
+- Generating synthetic data
+- Stress testing MongoDB
+- Performance benchmarking
+
 ### The crate is in the development and testing stage.<br>
 
 The generator works and fully performs its task of multi-threaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
