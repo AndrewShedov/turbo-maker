@@ -93,7 +93,7 @@ updated_at = "custom_updated_at"
 
 All fields in this section are optional. If there are no fields, empty documents will be created in the quantity specified in the field -<code>number_documents</code>, the documents will contain only - <code>_id: ObjectId('68dc8e144d1d8f5e10fdbbb9')</code>.
 
-The <code>complex_string</code> field contains the <code>generate_long_string</code> function, a built-in function created for testing the generator's speed. In <code>length = 5</code>, you can specify the number of random characters to generate. 
+The <code>complex_string</code> field contains the <code>generate_long_string</code> function, a built-in function created for testing the generator's speed. In <code>length = 100</code>, you can specify the number of random characters to generate.
 
 The <code>text = "example"</code> field is custom and can have any name.
 
