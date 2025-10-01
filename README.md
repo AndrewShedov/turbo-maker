@@ -4,6 +4,9 @@
 
 # turbo-maker
 
+**Super-fast** **multi-threaded** document generator for **MongoDB**, operating through **CLI**.<br>
+Generates **millions of documents** at **maximum speed**, utilizing **all CPU threads**.<br>
+
 ### The crate is in the development and testing stage.<br>
 
 The generator works and fully performs its task of multi-threaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
@@ -75,7 +78,7 @@ Accepts <code>number</code> and sets the time interval between documents.
 
 ```toml
 [document_fields]
-complex_string = {function = "generate_long_string", length = 5}
+complex_string = {function = "generate_long_string", length = 100}
 title = "example"
 text = "example" 
 created_at = "custom_created_at"
@@ -107,6 +110,8 @@ In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated 7.87 ti
 
 <img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_2.png" width="640" /><br>
 **Node.js**
+
+Benchmark system configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
 
 The test generated random strings of 500 characters.
 It primarily stresses the CPU but also creates I/O load.
