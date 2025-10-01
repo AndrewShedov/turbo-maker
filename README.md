@@ -49,7 +49,7 @@ Required fields must be specified:
 ```toml
 [settings]
 uri = "mongodb://127.0.0.1:27017"
-db = "crystalTest1"
+db = "crystal"
 collection = "posts"
 number_threads = "max"
 number_documents = 1_000_000
