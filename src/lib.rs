@@ -1,5 +1,6 @@
 pub mod config;
-pub mod worker;
+pub mod functions;
+pub mod generate;
 pub mod progress;
 pub mod utils;
-pub mod generate;
+pub mod worker;

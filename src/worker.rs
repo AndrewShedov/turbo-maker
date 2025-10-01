@@ -1,28 +1,22 @@
-use crate::config::Config;
-use crate::config::Document;
+use crate::config::{Config, Document, NumberThreads};
 use crate::utils::get_cpu_info;
 use mongodb::Client;
-use tokio::sync::mpsc;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use std::sync::atomic::{ AtomicU64, Ordering };
+use tokio::sync::mpsc;
 
-pub async fn run_workers(
-    config: Config,
-    generate_fn: fn(u64) -> Document,
-    generated: Arc<AtomicU64>
-) {
+pub async fn run_workers<F>(config: Config, generate_fn: F, generated: Arc<AtomicU64>)
+where
+    F: Fn(&Config, u64) -> Document + Send + Sync + Clone + 'static,
+{
     let (cpu_count, _cpu_model) = get_cpu_info();
-    let threads = if
-        config.number_threads == "max" ||
-        config.number_threads.parse::<usize>().is_err()
-    {
-        cpu_count
-    } else {
-        config.number_threads.parse().unwrap_or(cpu_count)
+    let threads = match config.settings.number_threads {
+        NumberThreads::Max => cpu_count,
+        NumberThreads::Count(num) => num as usize,
     };
 
-    let documents_per_thread = config.number_documents / (threads as u64);
-    let remainder = config.number_documents % (threads as u64);
+    let documents_per_thread = config.settings.number_documents / (threads as u64);
+    let remainder = config.settings.number_documents % (threads as u64);
     let (tx, mut rx) = mpsc::channel(threads);
 
     for i in 0..threads {
@@ -31,22 +25,22 @@ pub async fn run_workers(
         let to = from + documents_per_thread + extra;
         let config = config.clone();
         let generated = Arc::clone(&generated);
-        let generate_fn = generate_fn;
+        let generate_fn = generate_fn.clone();
         let tx = tx.clone();
 
         tokio::spawn(async move {
-            let client = Client::with_uri_str(&config.uri).await.unwrap();
-            let db = client.database(&config.db);
-            let collection = db.collection::<Document>(&config.collection);
+            let client = Client::with_uri_str(&config.settings.uri).await.unwrap();
+            let db = client.database(&config.settings.db);
+            let collection = db.collection::<Document>(&config.settings.collection);
 
-            let mut docs = Vec::with_capacity(config.batch_size as usize);
+            let mut docs = Vec::with_capacity(config.settings.batch_size as usize);
             for i in from..to {
-                let doc = generate_fn(i * config.time_step_ms);
+                let doc = generate_fn(&config, i * config.settings.time_step_ms);
                 docs.push(doc);
-                if docs.len() >= (config.batch_size as usize) {
+                if docs.len() >= (config.settings.batch_size as usize) {
                     let docs_to_insert = std::mem::take(&mut docs);
                     if let Ok(_) = collection.insert_many(docs_to_insert, None).await {
-                        generated.fetch_add(config.batch_size as u64, Ordering::SeqCst); // Updating to batch_size
+                        generated.fetch_add(config.settings.batch_size as u64, Ordering::SeqCst);
                     }
                 }
             }

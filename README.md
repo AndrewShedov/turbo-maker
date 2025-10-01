@@ -1,4 +1,133 @@
+[![Discord](https://img.shields.io/discord/1006372235172384849?style=for-the-badge&logo=5865F2&logoColor=black&labelColor=black&color=%23f3f3f3
+)](https://discord.gg/ENB7RbxVZE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge&logo=5865F2&logoColor=black&labelColor=black&color=%23f3f3f3)](https://github.com/AndrewShedov/turboMaker/blob/main/LICENSE)
+
 # turbo-maker
 
-The crate is in the development and testing stage.<br>
-Node.js implementation - [turboMaker](https://www.npmjs.com/package/turbo-maker)
+### The crate is in the development and testing stage.<br>
+
+The generator works and fully performs its task of multi-threaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
+
+### Installation & Usage
+
+1. Install crate:
+
+```bash
+cargo install turbo-maker
+```
+
+2. Create a config file — [turbo-maker.config.toml](https://github.com/AndrewShedov/turbo-maker/tree/main/config%20examples/common/turbo-maker.config.toml) — in a convenient location.
+
+3. Run turbo-maker with the path to your config file:
+
+**Windows**:
+```bash
+turbo-maker --config-path C:\Example\turbo-maker.config.toml
+```
+
+**Linux/macOS**:
+```bash
+turbo-maker --config-path /home/user/Example/turbo-maker.config.toml
+```
+
+### Explanation of the file structure - turbo-maker.config.js.
+
+### [settings]
+
+Required fields must be specified:
+
+```toml
+[settings]
+uri = "mongodb://127.0.0.1:27017"
+db = "crystalTest1"
+collection = "posts"
+number_threads = "max"
+number_documents = 1_000_000
+batch_size = 10_000
+time_step_ms = 20
+```
+
+**number_threads**
+
+Accepts either a <code>string</code> or a <code>number</code> and sets the number of CPU threads used.
+- for value <code>"max"</code>, all threads are used.
+- if the <code>number</code> exceeds the actual thread count, all threads are used.
+
+**number_documents**
+
+Accepts a <code>number</code>, specifying how many documents to generate.
+
+**batch_size**
+
+Accepts a <code>number</code> of documents per batch inserted into the database.
+
+- the larger the batchSize, the fewer requests MongoDB makes, leading to faster insertions.
+- however, a very large batchSize can increase memory consumption.
+- the optimal value depends on your computer performance and the number of documents being inserted.
+
+**time_step_ms**
+
+Accepts <code>number</code> and sets the time interval between documents.
+
+- With the value of <code>0</code> a large number of documents will have the same date of creation, due to a high generation rate, especially in multi-threaded mode.
+
+### [document_fields]
+
+```toml
+[document_fields]
+complex_string = {function = "generate_long_string", length = 5}
+title = "example"
+text = "example" 
+created_at = "custom_created_at"
+updated_at = "custom_updated_at"
+```
+
+All fields in this section are optional. If there are no fields, empty documents will be created in the quantity specified in the field -<code>number_documents</code>, the documents will contain only - <code>_id: ObjectId('68dc8e144d1d8f5e10fdbbb9')</code>.
+
+The <code>complex_string</code> field contains the <code>generate_long_string</code> function, a built-in function created for testing the generator's speed. In <code>length = 5</code>, you can specify the number of random characters to generate. 
+
+The fields <code>title = "example"</code> and <code>text = "example"</code> are custom and can have any names.
+
+### created_at & updated_at
+
+These are special fields that may be missing, in which case the document will not have a creation date. The time step between documents is specified using the <code>time_step_ms</code> field in the <code>[settings]</code> section.<br>
+
+<code>created_at = "custom_created_at"</code> → custom field name.
+
+<code>created_at = ""</code> → use the default field name created_at.
+
+<code>updated_at</code> repeats the value <code>created_at</code>
+
+In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated 7.87 times (687%) higher performance compared to the Node.js [version](https://www.npmjs.com/package/turbo-maker):
+
+
+<img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_1.png" width="640" /><br>
+**Rust**
+ 
+
+<img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_2.png" width="640" /><br>
+**Node.js**
+
+The test generated random strings of 500 characters.
+It primarily stresses the CPU but also creates I/O load.
+
+Test [code](https://github.com/AndrewShedov/turboMaker/blob/main/config%20examples/Parallel%20Computation%20Benchmark/turbo-maker.config.js) for the Node.js version.
+
+Test code for the Rust version:
+
+```rust
+pub fn generate_long_string(length: usize) -> String {
+    let mut rng = rand::thread_rng();
+    let mut result = String::with_capacity(length);
+    for _ in 0..length {
+        let char_code = rng.gen_range(65..91); // Letters A-Z
+        result.push((char_code as u8 as char).to_ascii_uppercase());
+        for _ in 0..1000 {
+            let _ = rng.gen::<u8>(); // Empty operation for load
+        }
+    }
+    result
+}
+```
+
+[SHEDOV.TOP](https://shedov.top/) | [CRYSTAL](https://crysty.ru/AndrewShedov) | [Discord](https://discord.gg/ENB7RbxVZE) | [Telegram](https://t.me/ShedovChannel) | [X](https://x.com/AndrewShedov) | [VK](https://vk.com/shedovchannel) | [VK Video](https://vkvideo.ru/@shedovchannel) | [YouTube](https://www.youtube.com/@AndrewShedov)

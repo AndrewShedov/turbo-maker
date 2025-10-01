@@ -1,13 +1,13 @@
 use clap::Parser;
-use turbo_maker::worker::run_workers;
-use turbo_maker::progress::show_progress;
-use turbo_maker::config::load_and_validate_config;
-use turbo_maker::generate::generate_document;
-use turbo_maker::utils::get_cpu_info;
-use std::sync::Arc;
 use std::sync::atomic::AtomicU64;
+use std::sync::Arc;
 use std::time::Instant;
-use sysinfo::{ System, RefreshKind, MemoryRefreshKind };
+use sysinfo::{MemoryRefreshKind, RefreshKind, System};
+use turbo_maker::config::{load_and_validate_config, NumberThreads};
+use turbo_maker::generate::generate_document;
+use turbo_maker::progress::show_progress;
+use turbo_maker::utils::get_cpu_info;
+use turbo_maker::worker::run_workers;
 
 // Function to format number with commas
 fn format_with_commas(num: u64) -> String {
@@ -28,9 +28,8 @@ fn format_with_commas(num: u64) -> String {
 
 // Function to get RAM information
 fn get_ram_info() -> String {
-    let mut sys = System::new_with_specifics(
-        RefreshKind::new().with_memory(MemoryRefreshKind::everything())
-    );
+    let mut sys =
+        System::new_with_specifics(RefreshKind::new().with_memory(MemoryRefreshKind::everything()));
     sys.refresh_memory();
     let total_memory = sys.total_memory(); // in bytes
     let memory_gb = (total_memory as f64) / (1024.0 * 1024.0 * 1024.0); // Convert to GB
@@ -51,13 +50,9 @@ async fn main() {
     let generated = Arc::new(AtomicU64::new(0));
 
     let (cpu_count, cpu_model) = get_cpu_info();
-    let threads = if
-        config.number_threads == "max" ||
-        config.number_threads.parse::<usize>().is_err()
-    {
-        cpu_count
-    } else {
-        config.number_threads.parse().unwrap_or(cpu_count)
+    let threads = match config.settings.number_threads {
+        NumberThreads::Max => cpu_count,
+        NumberThreads::Count(num) => num as usize,
     };
 
     // Display system and configuration information with an initial newline for spacing
@@ -66,27 +61,31 @@ async fn main() {
     println!(
         "🚀 Start | {} threads | {} documents | {} batch | {} timeStepMs\n",
         threads,
-        format_with_commas(config.number_documents),
-        format_with_commas(config.batch_size),
-        format_with_commas(config.time_step_ms)
+        format_with_commas(config.settings.number_documents),
+        format_with_commas(config.settings.batch_size),
+        format_with_commas(config.settings.time_step_ms)
     );
     println!(
-        "🌐 URI: {}\n🗄️ Database: {}\n📂 Collection: {}\n", // Added extra \n for spacing before progress
-        config.uri,
-        config.db,
-        config.collection
+        "🌐 URI:             {}\n🗄️ Database:        {}\n📂 Collection:      {}\n",
+        config.settings.uri, config.settings.db, config.settings.collection
     );
     println!("\n");
     // Launching a progress bar in a separate task
-    let progress_handle = tokio::spawn(
-        show_progress(Arc::clone(&generated), config.number_documents)
-    );
+    let progress_handle = tokio::spawn(show_progress(
+        Arc::clone(&generated),
+        config.settings.number_documents,
+    ));
 
     // Measuring time
     let start = Instant::now();
 
-    // Start generation with config cloning
-    run_workers(config.clone(), generate_document, generated.clone()).await;
+    // Start generation with config cloning, converting u64 to i64
+    run_workers(
+        config.clone(),
+        |c, offset| generate_document(c, offset as i64),
+        generated.clone(),
+    )
+    .await;
 
     // Wait until the progress bar is complete
     if let Ok(()) = progress_handle.await {

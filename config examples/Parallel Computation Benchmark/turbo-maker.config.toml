@@ -1,0 +1,18 @@
+ 
+# Parallel Computation Benchmark
+ 
+# Testing the performance of Rust in multi-threaded computation tasks, evaluating language efficiency, thread utilization, CPU capabilities, and I/O operations with MongoDB.
+
+# Adjust the value - 'length = 500', to regulate the load.
+ 
+[settings]
+uri = "mongodb://127.0.0.1:27017"
+db = "crystal"
+collection = "posts"
+number_threads = "max"
+number_documents = 1_000_000
+batch_size = 10_000
+time_step_ms = 20
+
+[document_fields]
+complex_string = {function = "generate_long_string", length = 500}

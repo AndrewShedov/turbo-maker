@@ -1,9 +1,9 @@
 // progress.rs
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use std::sync::atomic::{ AtomicU64, Ordering };
 use std::time::Duration;
 
-use sysinfo::{ System, RefreshKind, CpuRefreshKind, MINIMUM_CPU_UPDATE_INTERVAL };
+use sysinfo::{CpuRefreshKind, RefreshKind, System, MINIMUM_CPU_UPDATE_INTERVAL};
 use tokio::time::sleep;
 
 // Function to format number with commas
@@ -24,9 +24,8 @@ fn format_with_commas(num: u64) -> String {
 }
 
 pub async fn show_progress(generated: Arc<AtomicU64>, total: u64) {
-    let mut sys = System::new_with_specifics(
-        RefreshKind::new().with_cpu(CpuRefreshKind::everything())
-    );
+    let mut sys =
+        System::new_with_specifics(RefreshKind::new().with_cpu(CpuRefreshKind::everything()));
 
     // CPU warm-up
     sys.refresh_cpu_usage();
@@ -56,11 +55,7 @@ pub async fn show_progress(generated: Arc<AtomicU64>, total: u64) {
         let avg_cpu = if sys.cpus().is_empty() {
             0.0
         } else {
-            sys
-                .cpus()
-                .iter()
-                .map(|c| c.cpu_usage())
-                .sum::<f32>() / (sys.cpus().len() as f32)
+            sys.cpus().iter().map(|c| c.cpu_usage()).sum::<f32>() / (sys.cpus().len() as f32)
         };
         let ram_percent = if sys.total_memory() == 0 {
             0.0
@@ -70,7 +65,10 @@ pub async fn show_progress(generated: Arc<AtomicU64>, total: u64) {
 
         // redraw (clear 2 lines)
         print!("\x1B[2F\x1B[2K"); // cursor 2 lines up, clear
-        println!("🎁 {}  {:3.0}% | {} / {}", bar, percent, formatted_pos, formatted_len);
+        println!(
+            "🎁 {}  {:3.0}% | {} / {}",
+            bar, percent, formatted_pos, formatted_len
+        );
         println!("           CPU:{:5.1}% | RAM:{:5.1}%", avg_cpu, ram_percent);
 
         if gen >= total {
