@@ -21,10 +21,9 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 1. **Multi-threading** - each thread inserts documents in parallel.
 2. **Specify the number of threads** for data generation to adjust CPU load, **or set it to** <code>max</code> to utilize all available threads.
 3. Document distribution across threads considering the remainder.
-4. Generation with custom data schemas through the <code>generatingData</code> function.
-5. Precise <code>created_at</code>/<code>updated_at</code> handling with <code>time_step_ms</code>.
-6. <code>Batch</code> inserts for enhanced performance.
-7. Progress bar in the console with percentage, speed, and statistics, along with other informative logs:
+4. Precise <code>created_at</code>/<code>updated_at</code> handling with <code>time_step_ms</code>.
+5. <code>Batch</code> inserts for enhanced performance.
+6. Progress bar in the console with percentage, speed, and statistics, along with other informative logs:
 
 ### Technologies used
 
