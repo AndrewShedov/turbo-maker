@@ -86,7 +86,6 @@ Accepts <code>number</code> and sets the time interval between documents.
 ```toml
 [document_fields]
 complex_string = {function = "generate_long_string", length = 100}
-title = "example"
 text = "example" 
 created_at = "custom_created_at"
 updated_at = "custom_updated_at"
@@ -96,7 +95,7 @@ All fields in this section are optional. If there are no fields, empty documents
 
 The <code>complex_string</code> field contains the <code>generate_long_string</code> function, a built-in function created for testing the generator's speed. In <code>length = 5</code>, you can specify the number of random characters to generate. 
 
-The fields <code>title = "example"</code> and <code>text = "example"</code> are custom and can have any names.
+The <code>text = "example"</code> field is custom and can have any name.
 
 ### created_at & updated_at
 
