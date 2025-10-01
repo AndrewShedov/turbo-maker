@@ -8,7 +8,7 @@ batch_size = 10_000
 time_step_ms = 20
 
 [document_fields]
-complex_string = {function = "generate_long_string", length = 100}
+complex_string = {function = "generate_long_string", length = 5}
 title = "example"
 text = "example" 
 created_at = "custom_created_at"

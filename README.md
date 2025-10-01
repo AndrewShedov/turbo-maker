@@ -16,6 +16,23 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 - Stress testing MongoDB
 - Performance benchmarking
 
+### Features
+
+1. **Multi-threading** - each thread inserts documents in parallel.
+2. **Specify the number of threads** for data generation to adjust CPU load, **or set it to** <code>max</code> to utilize all available threads.
+3. Document distribution across threads considering the remainder.
+4. Generation with custom data schemas through the <code>generatingData</code> function.
+5. Precise <code>created_at</code>/<code>updated_at</code> handling with <code>time_step_ms</code>.
+6. <code>Batch</code> inserts for enhanced performance.
+7. Progress bar in the console with percentage, speed, and statistics, along with other informative logs:
+
+### Technologies used
+
+- Tokio
+- std::sync::atomic
+- sysinfo
+- clap / serde / toml
+
 The generator works and fully performs its task of multi-threaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
 
 ### Installation & Usage
@@ -32,12 +49,12 @@ cargo install turbo-maker
 
 **Windows**:
 ```bash
-turbo-maker --config-path C:\Example\turbo-maker.config.toml
+turbo-maker --config-path C:\example\turbo-maker.config.toml
 ```
 
 **Linux/macOS**:
 ```bash
-turbo-maker --config-path /home/user/Example/turbo-maker.config.toml
+turbo-maker --config-path /home/user/example/turbo-maker.config.toml
 ```
 
 ### Explanation of the file structure - turbo-maker.config.js.
