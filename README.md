@@ -27,7 +27,7 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 
 <img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/gif.gif" width="590" /><br>
 Generation of **1,000,000 documents** in **2 seconds**, filled with the following [content](https://github.com/AndrewShedov/turbo-maker/blob/main/config%20examples/lite/turbo-maker.config.toml).<br>
-Benchmark system configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
+PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
 
 ### Technologies used
 
@@ -137,7 +137,7 @@ In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated **7.87 
 <img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_2.png" width="640" /><br>
 **Node.js**
 
-Benchmark system configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
+PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
 
 The test generated random strings of 500 characters.
 It primarily stresses the CPU but also creates I/O load.
