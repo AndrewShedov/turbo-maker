@@ -1,0 +1,14 @@
+[settings]
+uri = "mongodb://127.0.0.1:27017"
+db = "crystal"
+collection = "posts"
+number_threads = "max"
+number_documents = 1_000_000
+batch_size = 10_000
+time_step_ms = 20
+
+[document_fields]
+title = "Zorvian kalyra zorvian astronae mirthos. Nuvion nexura vorthal nexura kalyra dravion. #Mars tarnyx vireon kalyra eltheon zorvian vorthal cryonex."
+text = "Nuvion velthara lurexis zenthul dravion velthara zenthul solvenar. Skavari velthara tarnyx nuvion orleth #Jupiter. Ximora nexura nexura lurexis nexura zorvian gralith #text #Saturn velmari solvenar virella. Lunara virella zorvian thalor nexura zephirion #Leda. Thalor lurexis velmari lunara virella #Triton #Ceres zenthul thelux gralith. Eltheon kalyra quarnex orleth mirthos solvenar. Zenthul nuvion zephirion zenthul dravion yxelan velmari zephirion. Vorthal ximora zenthul yxelan yxelan kalyra tarnyx #Haumea cryonex #Ceres ximora. Vireon nexura skavari kalyra. Astronae dravion skavari vireon thalor zenthul. Tarnyx velthara lunara skavari. Vireon lurexis vorthal velmari velmari." 
+created_at = "custom_created_at"
+updated_at = "custom_updated_at"

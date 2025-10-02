@@ -25,6 +25,10 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 5. <code>Batch</code> inserts for enhanced performance.
 6. Progress bar in the console with percentage, speed, and statistics, along with other informative logs:
 
+<img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/gif.gif" width="590" /><br>
+Generation of **1,000,000 documents** in **2 seconds**, filled with the following [content](https://github.com/AndrewShedov/turbo-maker/blob/main/config%20examples/lite/turbo-maker.config.toml).<br>
+Benchmark system configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
+
 ### Technologies used
 
 - Tokio
