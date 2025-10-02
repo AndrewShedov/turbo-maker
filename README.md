@@ -46,7 +46,7 @@ The generator works and fully performs its task of multi-threaded document inser
 cargo install turbo-maker
 ```
 
-2. Create a config file — [turbo-maker.config.toml](https://github.com/AndrewShedov/turbo-maker/tree/main/config%20examples/common/turbo-maker.config.toml) — in a convenient location.
+2. Create a config file — [turbo-maker.config.toml](https://github.com/AndrewShedov/turbo-maker/tree/main/config%20examples/common/turbo-maker.config.toml) in a convenient location.
 
 3. Run turbo-maker with the path to your config file:
 
