@@ -139,9 +139,9 @@ In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated **7.87 
 <img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_2.png" width="640" /><br>
 **Node.js**
 
+PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.<br>
 The test generated random strings of 500 characters.
 It primarily stresses the CPU but also creates I/O load.<br>
-PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.<br>
 [Test code](https://github.com/AndrewShedov/turboMaker/blob/main/config%20examples/Parallel%20Computation%20Benchmark/turbo-maker.config.js) for the Node.js version.<br>
 Test code for the Rust version:
 
