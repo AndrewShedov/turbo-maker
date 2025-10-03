@@ -18,7 +18,7 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 
 ### Features
 
-1. **Multi-threading** - each thread inserts documents in parallel.
+1. **Multi-threading** — each thread inserts documents in parallel.
 2. **Specify the number of threads** for data generation to adjust CPU load, **or set it to** <code>max</code> to utilize all available threads.
 3. Document distribution across threads considering the remainder.
 4. Precise <code>created_at</code>/<code>updated_at</code> handling with <code>time_step_ms</code>.
@@ -60,7 +60,7 @@ turbo-maker --config-path C:\example\turbo-maker.config.toml
 turbo-maker --config-path /home/user/example/turbo-maker.config.toml
 ```
 
-### Explanation of the file structure - turbo-maker.config.js.
+### Explanation of the file structure — turbo-maker.config.js.
 
 ### [settings]
 
@@ -141,8 +141,7 @@ In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated **7.87 
 
 The test generated random strings of 500 characters.
 It primarily stresses the CPU but also creates I/O load.<br>
-PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
-
+PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.<br>
 [Test code](https://github.com/AndrewShedov/turboMaker/blob/main/config%20examples/Parallel%20Computation%20Benchmark/turbo-maker.config.js) for the Node.js version.<br>
 Test code for the Rust version:
 
