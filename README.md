@@ -127,6 +127,8 @@ These are special fields that may be missing, in which case the document will no
 
 <code>updated_at</code> repeats the value <code>created_at</code>
 
+## Comparison of Node.js and Rust version of the generator
+
 In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated **7.87 times (687%)** higher performance compared to the [Node.js version](https://www.npmjs.com/package/turbo-maker):
 
 
@@ -137,13 +139,11 @@ In comparative hybrid (CPU | I/O) tests, the Rust generator demonstrated **7.87 
 <img src="https://raw.githubusercontent.com/AndrewShedov/turbo-maker/refs/heads/main/assets/screenshot_2.png" width="640" /><br>
 **Node.js**
 
+The test generated random strings of 500 characters.
+It primarily stresses the CPU but also creates I/O load.<br>
 PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
 
-The test generated random strings of 500 characters.
-It primarily stresses the CPU but also creates I/O load.
-
-[Test code](https://github.com/AndrewShedov/turboMaker/blob/main/config%20examples/Parallel%20Computation%20Benchmark/turbo-maker.config.js) for the Node.js version.
-
+[Test code](https://github.com/AndrewShedov/turboMaker/blob/main/config%20examples/Parallel%20Computation%20Benchmark/turbo-maker.config.js) for the Node.js version.<br>
 Test code for the Rust version:
 
 ```rust
