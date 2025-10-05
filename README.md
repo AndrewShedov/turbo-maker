@@ -6,7 +6,7 @@
 
 ### The crate is in the development and testing stage.<br>
 
-**Super-fast** **multi-threaded** document generator for **MongoDB**, operating through **CLI**.<br>
+**Superfast**, **multithreaded** document generator for **MongoDB**, operating through **CLI**.<br>
 Generates **millions of documents** at **maximum speed**, utilizing **all CPU threads**.<br>
 
 ###  Suitable for
@@ -18,7 +18,7 @@ Generates **millions of documents** at **maximum speed**, utilizing **all CPU th
 
 ### Features
 
-1. **Multi-threading** — each thread inserts documents in parallel.
+1. **Multithreading** — each thread inserts documents in parallel.
 2. **Specify the number of threads** for data generation to adjust CPU load, **or set it to** <code>max</code> to utilize all available threads.
 3. Document distribution across threads considering the remainder.
 4. Precise <code>created_at</code>/<code>updated_at</code> handling with <code>time_step_ms</code>.
@@ -36,7 +36,7 @@ PC configuration: Intel i5-12600K, 80GB DDR4 RAM, Samsung 980 PRO 1TB SSD.
 - sysinfo
 - clap / serde / toml
 
-The generator works and fully performs its task of multi-threaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
+The generator works and fully performs its task of multithreaded document insertion. However, additional data generation functions (random text, numbers, etc.) are still under development.
 
 ### Installation & Usage
 
@@ -99,7 +99,7 @@ Accepts a <code>number</code> of documents per batch inserted into the database.
 
 Accepts <code>number</code> and sets the time interval between documents.
 
-- With the value of <code>0</code> a large number of documents will have the same date of creation, due to a high generation rate, especially in multi-threaded mode.
+- With the value of <code>0</code> a large number of documents will have the same date of creation, due to a high generation rate, especially in multithreaded mode.
 
 ### [document_fields]
 
