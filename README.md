@@ -2,8 +2,6 @@
 
 # turbo-maker
 
-### The crate is in the development and testing stage.<br>
-
 **Superfast**, **multithreaded** document generator for **MongoDB**, operating through **CLI**.<br>
 Generates **millions of documents** at **maximum speed**, utilizing **all CPU threads**.<br>
 
